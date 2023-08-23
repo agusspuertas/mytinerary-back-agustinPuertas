@@ -3,11 +3,16 @@ import Cities from "../models/Cities.js"
 
 const controller = {
     getCities: async (req, res) => {
+        
+        const queries = {}
+
+        if(req.query.nombre){
+            queries.nombre = new RegExp(`^${req.query.nombre}`,'i')
+        }
 
         try{
             
-            const cities = await Cities.find()
-
+            const cities = await Cities.find(queries)
             return res.status(200).json({
                 succes: true,
                 cities: cities
