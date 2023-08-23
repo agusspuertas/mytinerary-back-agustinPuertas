@@ -1,0 +1,32 @@
+{
+  "name": "mytinerary-back-agustinpuertas",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon app,js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/agusspuertas/mytinerary-back-agustinPuertas.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/agusspuertas/mytinerary-back-agustinPuertas/issues"
+  },
+  "homepage": "https://github.com/agusspuertas/mytinerary-back-agustinPuertas#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "mongoose": "^7.4.4",
+    "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}
