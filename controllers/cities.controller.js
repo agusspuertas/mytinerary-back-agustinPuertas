@@ -7,7 +7,8 @@ const controller = {
         const queries = {}
 
         if(req.query.nombre){
-            queries.nombre = new RegExp(`^${req.query.nombre}`,'i')
+            const nombreSinEspacios = req.query.nombre.replace(/\s+/g, '').split('').join('.*');
+            queries.nombre = new RegExp(`^${nombreSinEspacios}`, 'i');
         }
 
         try{
