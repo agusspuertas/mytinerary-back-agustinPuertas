@@ -6,6 +6,7 @@ const schema = new Schema({
     foto: {type: String, require: true},
     pais: {type: String, require: true},
 
+    
 }, {
     timestamps: true
 })
