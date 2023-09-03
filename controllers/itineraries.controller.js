@@ -1,4 +1,4 @@
-import Itineraries from "../models/Itineraries";
+import Itineraries from "../models/Itineraries.js";
 
 const controller = {
 
