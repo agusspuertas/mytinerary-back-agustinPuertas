@@ -1,14 +1,13 @@
 import express from "express"
-import itinerariesController from '../controllers/itineraries.controller.js'
+import itineraryController from '../controllers/itinerary.controller.js'
 
 const router = express.Router()
-const {getItineraries, createItinerary, getItineraryByCityId, getItineraryById, updateItinerary, deleteItinerary} = itinerariesController
+const {getItineraries, createItinerary, getItineraryById, updateItinerary, deleteItinerary} = itineraryController
 
 router.get('/',getItineraries)
 router.post('/',createItinerary)
-router.get('/:cities',getItineraryByCityId)
 router.get('/:id',getItineraryById)
 router.put('/:id',updateItinerary)
 router.delete('/:id',deleteItinerary)
-
+router.route("/city/:cityId").get(itineraryController.getItineraryByCity);
 export default router

@@ -1,7 +1,7 @@
 import { Schema,model,Types } from 'mongoose';
 
 
-const collection = 'itineraries';
+const collection = 'Itinerary';
 const schema = new Schema({
     nombre:{type:String,required:true},
     nombreUsuario:{type:String,required:true},
@@ -11,11 +11,11 @@ const schema = new Schema({
     likes:{type:String,required:true},
     hashtags:[{type:String,required:true}],
     comentarios:{type:String},
-    city: {type: Types.ObjectId, ref: "cities"}
+    city: {type: Types.ObjectId, ref: "cities",required: true }
 }, {
     timestamps: true
 })
 
-const Itineraries= model(collection, schema)
+const Itinerary= model(collection, schema)
 
-export default Itineraries 
+export default Itinerary 
