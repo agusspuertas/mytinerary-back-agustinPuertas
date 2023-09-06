@@ -37,28 +37,29 @@ const controller = {
             }
             return res.status(404).json({
                 success:false,
-                message: 'Error founding itinerary'
+                message: 'itinerario no encontrado'
             })
 
         } catch (error) {
             return res.status(500).json({
                 success:false,
-                message: 'Error at getting the itinerary'
+                message: 'error al obtener el itinerario'
             })
         }
     },
 
 
     getItineraryByCity: async (req, res) => {
+
         try {
           const { cityId } = req.params;
           const itinerary = await Itinerary.find({ city: cityId });
           if (!itinerary)
-            return res.status(404).json({ message: "itinerary not found" });
+            return res.status(404).json({ message: "itinerario no encontrado" });
           res.json(itinerary).status(200);
         } catch (error) {
           res
-            .json({ message: error.message || "errorr getting itinerary" })
+            .json({ message: error.message || "error al obtener el itinerario" })
             .status(500);
         }
       },
