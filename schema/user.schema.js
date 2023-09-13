@@ -24,9 +24,6 @@ export const createUserSchema = Joi.object({
         .required()
         .min(2)
         .max(30),
-    pais: Joi.string()
-        .min(2)
-        .max(20),
     foto: Joi.string()
         .uri(),
 })

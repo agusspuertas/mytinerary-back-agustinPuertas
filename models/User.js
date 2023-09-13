@@ -7,10 +7,10 @@ let schema = new Schema({
     email: {type:String, required:true},
     password: {type:String, required:true},
     foto: {type:String},
-    pais: {type:String, required:true},
-    // online: {type:Boolean, default: false},
-    // verified: {type:Boolean, default: true},
-    // verified_code: {type:String},
+    pais: {type:String},
+    online: {type:Boolean, default: false},
+    verified: {type:Boolean, default: true},
+    verified_code: {type:String},
 },{
     timestamps:true
 })
