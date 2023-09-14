@@ -12,10 +12,10 @@ export async function verify(token_id) {
     const payload = ticket.getPayload();
 
     return {
-        name: payload.name,
+        given_name: payload.given_name,
+        family_name: payload.family_name,
         email: payload.email,
         photo: payload.picture
     }
 
 }
-verify().catch(console.error);

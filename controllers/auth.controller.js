@@ -66,21 +66,23 @@ const controller = {
         const {token_id} = req.body;
         
         try {
-         const {name, email, photo} = await verify(token_id)
+         const {given_name,family_name,email, photo} = await verify(token_id)
 
          let user = await User.findOne({ email })
 
-         
+ 
+
          if(!user){
              
              const data = {
-                 name,
+                 nombre: given_name,
+                 apellido: family_name,
                  email,
-                 photo,
+                 foto: photo,
                  password: bcryptjs.hashSync(process.env.STANDARD_PASS,10),
                  google: true,
                  verified_code: crypto.randomBytes(10).toString('hex')
-             }
+                }
 
              user = await User.create(data)
          }
@@ -92,7 +94,7 @@ const controller = {
                 id: user._id,
                 email: user.email,
                 nombre: user.nombre,
-                // apellido: user.apellido,
+                apellido: user.apellido,
                 foto: user.foto
             },
             process.env.SECRET,
