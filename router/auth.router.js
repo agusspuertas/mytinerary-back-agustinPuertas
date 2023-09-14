@@ -5,6 +5,7 @@ import { accoutExistsSignin } from '../middlewares/auth/accountExistsSignin.midd
 import { accountHasBeenVerified } from '../middlewares/auth/accountHasBeenVerified.middleware.js';
 import { passwordIsOk } from '../middlewares/auth/passwordIsOk.middleware.js';
 import passport from '../middlewares/passport.js';
+import { token } from 'morgan';
 
 const {signup, signin, signout} = authController
 
@@ -15,5 +16,7 @@ router.post('/signup', /*validator(validateSignup),*/ accountExistsSignup, signu
 router.post('/signin', /*validator(validateSignup),*/ accoutExistsSignin,accountHasBeenVerified,passwordIsOk,signin)
 
 router.post('/signout',passport.authenticate('jwt', {session: false}) ,signout)
+
+router.post('/token', passport.authenticate('jwt', { session: false}),authController.token)
 
 export default router
