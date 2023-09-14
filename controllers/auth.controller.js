@@ -2,6 +2,8 @@ import crypto from 'crypto'
 import bcryptjs from 'bcryptjs'
 import User from '../models/User.js'
 import jwt from 'jsonwebtoken'
+import { verify } from '../helpers/google-verify.js'
+
 
 const controller = {
     signup: async (req, res, next) => {
@@ -53,6 +55,58 @@ const controller = {
                 }
             })
 
+        } catch (error) {
+            return res.status(500).json({
+                success: false,
+                message: 'Error authenticating user'
+            })
+        }
+    },
+    googleSignIn: async (req, res, next) => {
+        const {token_id} = req.body;
+        
+        try {
+         const {name, email, photo} = await verify(token_id)
+
+         let user = await User.findOne({ email })
+
+         
+         if(!user){
+             
+             const data = {
+                 name,
+                 email,
+                 photo,
+                 password: bcryptjs.hashSync(process.env.STANDARD_PASS,10),
+                 google: true,
+                 verified_code: crypto.randomBytes(10).toString('hex')
+             }
+
+             user = await User.create(data)
+         }
+
+         user.online=true
+         await user.save()
+         const token = jwt.sign(
+            {
+                id: user._id,
+                email: user.email,
+                nombre: user.nombre,
+                // apellido: user.apellido,
+                foto: user.foto
+            },
+            process.env.SECRET,
+            {expiresIn: '10h'}
+        )
+
+         res.status(200).json({
+            succes: true,
+            message: 'User logged in correctly with Google',
+            response: {
+                token,
+                user
+            }            
+         })
         } catch (error) {
             return res.status(500).json({
                 success: false,

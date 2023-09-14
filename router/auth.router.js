@@ -7,13 +7,14 @@ import { passwordIsOk } from '../middlewares/auth/passwordIsOk.middleware.js';
 import passport from '../middlewares/passport.js';
 import { token } from 'morgan';
 
-const {signup, signin, signout} = authController
+const {signup, signin, signout, googleSignIn} = authController
 
 const router = express.Router();
 
 router.post('/signup', /*validator(validateSignup),*/ accountExistsSignup, signup)
 
 router.post('/signin', /*validator(validateSignup),*/ accoutExistsSignin,accountHasBeenVerified,passwordIsOk,signin)
+router.post('/google', googleSignIn)
 
 router.post('/signout',passport.authenticate('jwt', {session: false}) ,signout)
 
